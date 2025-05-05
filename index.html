@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Git Cheat Sheet</title>
+    <link rel="stylesheet" href="style.css" />
+    
+  </head>
+  <body>
+    <h1>Git Cheat Sheet</h1>
+    <p>
+      This cheat sheet provides a quick reference to common Git commands and
+      workflows.
+    </p>
+
+    <h2 class="section-header">Table of Content</h2>
+    <ul>
+      <li>Creating Snapshots</li>
+      <li>Browsing History</li>
+      <li>Branching & Merging</li>
+      <li>Collaboration</li>
+      <li>Rewriting History</li>
+    </ul>
+
+    <h2 class="section-header">Creating Snapshots</h2>
+    <h3>Initializing a repository</h3>
+    <p>
+      <span class="command">git init</span>
+      <span class="description">Initializes a new Git repository</span>
+    </p>
+
+    <h3>Staging files</h3>
+    <ul>
+      <li>
+        <span class="command">git add file1.js</span>
+        <span class="description">Stages a single file</span>
+      </li>
+      <li>
+        <span class="command">git add file1.js file2.js</span>
+        <span class="description">Stages multiple files</span>
+      </li>
+      <li>
+        <span class="command">git add *.js</span>
+        <span class="description">Stages files with a pattern</span>
+      </li>
+      <li>
+        <span class="command">git add .</span>
+        <span class="description"
+          >Stages the current directory and all its content</span
+        >
+      </li>
+    </ul>
+
+    <h3>Viewing the status</h3>
+    <ul>
+      <li>
+        <span class="command">git status</span>
+        <span class="description">Full status</span>
+      </li>
+      <li>
+        <span class="command">git status -s</span>
+        <span class="description">Short status</span>
+      </li>
+    </ul>
+
+    <h3>Committing the staged files</h3>
+    <ul>
+      <li>
+        <span class="command">git commit -m “Message”</span>
+        <span class="description">Commits with a one-line message</span>
+      </li>
+      <li>
+        <span class="command">git commit</span>
+        <span class="description"
+          >Opens the default editor to type a long message</span
+        >
+      </li>
+    </ul>
+
+    <h3>Skipping the staging area</h3>
+    <p>
+      <span class="command">git commit -am “Message”</span>
+      <span class="description">Commits staged changes and adds a message</span>
+    </p>
+
+    <h3>Removing files</h3>
+    <ul>
+      <li>
+        <span class="command">git rm file1.js</span>
+        <span class="description"
+          >Removes from working directory and staging area</span
+        >
+      </li>
+      <li>
+        <span class="command">git rm --cached file1.js</span>
+        <span class="description">Removes from staging area only</span>
+      </li>
+    </ul>
+
+    <h3>Renaming or moving files</h3>
+    <p>
+      <span class="command">git mv file1.js file1.txt</span>
+      <span class="description">Renames or moves a file</span>
+    </p>
+
+    <h3>Viewing the staged/unstaged changes</h3>
+    <ul>
+      <li>
+        <span class="command">git diff</span>
+        <span class="description">Shows unstaged changes</span>
+      </li>
+      <li>
+        <span class="command">git diff --staged</span>
+        <span class="description">Shows staged changes</span>
+      </li>
+      <li>
+        <span class="command">git diff --cached</span>
+        <span class="description">Same as the above</span>
+      </li>
+    </ul>
+
+    <h3>Viewing the history</h3>
+    <ul>
+      <li>
+        <span class="command">git log</span>
+        <span class="description">Full history</span>
+      </li>
+      <li>
+        <span class="command">git log --oneline</span>
+        <span class="description">Summary</span>
+      </li>
+      <li>
+        <span class="command">git log --reverse</span>
+        <span class="description"
+          >Lists the commits from the oldest to the newest</span
+        >
+      </li>
+    </ul>
+
+    <h3>Viewing a commit</h3>
+    <ul>
+      <li>
+        <span class="command">git show 921a2ff</span>
+        <span class="description">Shows the given commit</span>
+      </li>
+      <li>
+        <span class="command">git show HEAD</span>
+        <span class="description">Shows the last commit</span>
+      </li>
+      <li>
+        <span class="command">git show HEAD~2</span>
+        <span class="description">Two steps before the last commit</span>
+      </li>
+      <li>
+        <span class="command">git show HEAD:file.js</span>
+        <span class="description"
+          >Shows the version of file.js stored in the last commit</span
+        >
+      </li>
+    </ul>
+
+    <h3>Unstaging files (undoing git add)</h3>
+    <p>
+      <span class="command">git restore --staged file.js</span>
+      <span class="description"
+        >Copies the last version of file.js from repo to index</span
+      >
+    </p>
+
+    <h3>Discarding local changes</h3>
+    <ul>
+      <li>
+        <span class="command">git restore file.js</span>
+        <span class="description"
+          >Copies file.js from index to working directory</span
+        >
+      </li>
+      <li>
+        <span class="command">git restore file1.js file2.js</span
+        ><span class="description"
+          >Restores multiple files in working directory</span
+        >
+      </li>
+      <li>
+        <span class="command">git restore .</span>
+        <span class="description"
+          >Discards all local changes (except untracked files)</span
+        >
+      </li>
+      <li>
+        <span class="command">git clean -fd</span>
+        <span class="description">Removes all untracked files</span>
+      </li>
+    </ul>
+
+    <h3>Restoring an earlier version of a file</h3>
+    <p>
+      <span class="command">git restore --source=HEAD~2 file.js</span>
+      <span class="description">Restores file to a specific version</span>
+    </p>
+
+    <h2 class="section-header">Browsing History</h2>
+    <h3>Viewing the history</h3>
+    <ul>
+      <li>
+        <span class="command">git log --stat</span>
+        <span class="description">Shows the list of modified files</span>
+      </li>
+      <li>
+        <span class="command">git log --patch</span>
+        <span class="description">Shows the actual changes (patches)</span>
+      </li>
+    </ul>
+
+    <h3>Filtering the history</h3>
+    <ul>
+      <li>
+        <span class="command">git log -3</span>
+        <span class="description">Shows the last 3 entries</span>
+      </li>
+      <li>
+        <span class="command">git log --author=“Mosh”</span>
+        <span class="description">Commits by Mosh</span>
+      </li>
+      <li>
+        <span class="command">git log --before=“2020-08-17”</span>
+        <span class="description">Commits before a specific date</span>
+      </li>
+      <li>
+        <span class="command">git log --after=“one week ago”</span>
+        <span class="description">Commits after a specific date</span>
+      </li>
+      <li>
+        <span class="command">git log --grep=“GUI”</span>
+        <span class="description">Commits with “GUI” in their message</span>
+      </li>
+      <li>
+        <span class="command">git log -S“GUI”</span>
+        <span class="description">Commits with “GUI” in their patches</span>
+      </li>
+      <li>
+        <span class="command">git log hash1..hash2</span>
+        <span class="description">Range of commits</span>
+      </li>
+      <li>
+        <span class="command">git log file.txt</span>
+        <span class="description">Commits that touched file.txt</span>
+      </li>
+    </ul>
+
+    <h3>Formatting the log output</h3>
+    <p>
+      <span class="command">git log --pretty=format:”%an committed %H”</span>
+      <span class="description">Formats the log output</span>
+    </p>
+
+    <h3>Creating an alias</h3>
+    <p>
+      <span class="command">git config --global alias.lg “log --oneline"</span>
+      <span class="description">Creates a Git alias</span>
+    </p>
+
+    <h3>Viewing a commit</h3>
+    <ul>
+      <li>
+        <span class="command">git show HEAD~2</span>
+        <span class="description">Shows a specific commit</span>
+      </li>
+      <li>
+        <span class="command">git show HEAD~2:file1.txt</span>
+        <span class="description"
+          >Shows the version of file stored in this commit</span
+        >
+      </li>
+    </ul>
+
+    <h3>Comparing commits</h3>
+    <ul>
+      <li>
+        <span class="command">git diff HEAD~2 HEAD</span>
+        <span class="description">Shows the changes between two commits</span>
+      </li>
+      <li>
+        <span class="command">git diff HEAD~2 HEAD file.txt</span>
+        <span class="description">Changes to file.txt only</span>
+      </li>
+    </ul>
+
+    <h3>Checking out a commit</h3>
+    <ul>
+      <li>
+        <span class="command">git checkout dad47ed</span>
+        <span class="description">Checks out the given commit</span>
+      </li>
+      <li>
+        <span class="command">git checkout master</span>
+        <span class="description">Checks out the master branch</span>
+      </li>
+    </ul>
+
+    <h3>Finding a bad commit</h3>
+    <ul>
+      <li>
+        <span class="command">git bisect start</span>
+        <span class="description">Starts the bisect process</span>
+      </li>
+      <li>
+        <span class="command">git bisect bad</span>
+        <span class="description"
+          >Marks the current commit as a bad commit</span
+        >
+      </li>
+      <li>
+        <span class="command">git bisect good ca49180</span>
+        <span class="description">Marks the given commit as a good commit</span>
+      </li>
+      <li>
+        <span class="command">git bisect reset</span>
+        <span class="description">Terminates the bisect session</span>
+      </li>
+    </ul>
+
+    <h3>Finding contributors</h3>
+    <p>
+      <span class="command">git shortlog</span>
+      <span class="description">Displays a summary of contributors</span>
+    </p>
+
+    <h3>Viewing the history of a file</h3>
+    <ul>
+      <li>
+        <span class="command">git log file.txt</span>
+        <span class="description">Shows the commits that touched file.txt</span>
+      </li>
+      <li>
+        <span class="command">git log --stat file.txt</span>
+        <span class="description"
+          >Shows statistics (the number of changes) for file.txt</span
+        >
+      </li>
+      <li>
+        <span class="command">git log --patch file.txt</span>
+        <span class="description"
+          >Shows the patches (changes) applied to file.txt</span
+        >
+      </li>
+    </ul>
+
+    <h3>Finding the author of lines</h3>
+    <p>
+      <span class="command">git blame file.txt</span>
+      <span class="description">Shows the author of each line in file.txt</span>
+    </p>
+
+    <h3>Tagging</h3>
+    <ul>
+      <li>
+        <span class="command">git tag v1.0</span>
+        <span class="description">Tags the last commit as v1.0</span>
+      </li>
+      <li>
+        <span class="command">git tag v1.0 5e7a828</span>
+        <span class="description">Tags an earlier commit</span>
+      </li>
+      <li>
+        <span class="command">git tag</span>
+        <span class="description">Lists all the tags</span>
+      </li>
+      <li>
+        <span class="command">git tag -d v1.0</span>
+        <span class="description">Deletes the given tag</span>
+      </li>
+    </ul>
+
+    <h2 class="section-header">Branching & Merging</h2>
+    <h3>Managing branches</h3>
+    <ul>
+      <li>
+        <span class="command">git branch bugfix</span>
+        <span class="description">Creates a new branch called bugfix</span>
+      </li>
+      <li>
+        <span class="command">git checkout bugfix</span>
+        <span class="description">Switches to the bugfix branch</span>
+      </li>
+      <li>
+        <span class="command">git switch bugfix</span>
+        <span class="description">Same as the above</span>
+      </li>
+      <li>
+        <span class="command">git switch -C bugfix</span>
+        <span class="description">Creates and switches to branch</span>
+      </li>
+      <li>
+        <span class="command">git branch -d bugfix</span>
+        <span class="description">Deletes the bugfix branch</span>
+      </li>
+    </ul>
+
+    <h3>Comparing branches</h3>
+    <ul>
+      <li>
+        <span class="command">git log master..bugfix</span>
+        <span class="description"
+          >Lists the commits in the bugfix branch not in master</span
+        >
+      </li>
+      <li>
+        <span class="command">git diff master..bugfix</span>
+        <span class="description">Shows the summary of changes</span>
+      </li>
+    </ul>
+
+    <h3>Stashing</h3>
+    <ul>
+      <li>
+        <span class="command">git stash push -m “New tax rules”</span>
+        <span class="description">Creates a new stash</span>
+      </li>
+      <li>
+        <span class="command">git stash list</span>
+        <span class="description">Lists all the stashes</span>
+      </li>
+      <li>
+        <span class="command">git stash show stash@{1}</span>
+        <span class="description">Shows the given stash</span>
+      </li>
+      <li>
+        <span class="command">git stash show 1</span>
+        <span class="description">Shortcut for stash@{1}</span>
+      </li>
+      <li>
+        <span class="command">git stash apply 1</span>
+        <span class="description"
+          >Applies the given stash to the working dir</span
+        >
+      </li>
+      <li>
+        <span class="command">git stash drop 1</span>
+        <span class="description">Deletes the given stash</span>
+      </li>
+      <li>
+        <span class="command">git stash clear</span>
+        <span class="description">Deletes all the stashes</span>
+      </li>
+    </ul>
+
+    <h3>Merging</h3>
+    <ul>
+      <li>
+        <span class="command">git merge bugfix</span>
+        <span class="description"
+          >Merges the bugfix branch into the current branch</span
+        >
+      </li>
+      <li>
+        <span class="command">git merge --no-ff bugfix</span>
+        <span class="description"
+          >Creates a merge commit even if FF is possible</span
+        >
+      </li>
+      <li>
+        <span class="command">git merge --squash bugfix</span>
+        <span class="description">Performs a squash merge</span>
+      </li>
+      <li>
+        <span class="command">git merge --abort</span>
+        <span class="description">Aborts the merge</span>
+      </li>
+    </ul>
+
+    <h3>Viewing the merged branches</h3>
+    <ul>
+      <li>
+        <span class="command">git branch --merged</span>
+        <span class="description">Shows the merged branches</span>
+      </li>
+      <li>
+        <span class="command">git branch --no-merged</span>
+        <span class="description">Shows the unmerged branches</span>
+      </li>
+    </ul>
+
+    <h3>Rebasing</h3>
+    <p>
+      <span class="command">git rebase master</span>
+      <span class="description">Changes the base of the current branch</span>
+    </p>
+
+    <h3>Cherry picking</h3>
+    <p>
+      <span class="command">git cherry-pick dad47ed</span>
+      <span class="description"
+        >Applies the given commit on the current branch</span
+      >
+    </p>
+
+    <h2 class="section-header">Collaboration</h2>
+    <h3>Cloning a repository</h3>
+    <p>
+      <span class="command">git clone url</span>
+      <span class="description">Clones a repository from a URL</span>
+    </p>
+
+    <h3>Syncing with remotes</h3>
+    <ul>
+      <li>
+        <span class="command">git fetch origin master</span>
+        <span class="description">Fetches master from origin</span>
+      </li>
+      <li>
+        <span class="command">git fetch origin</span>
+        <span class="description">Fetches all objects from origin</span>
+      </li>
+      <li>
+        <span class="command">git fetch</span>
+        <span class="description">Shortcut for “git fetch origin”</span>
+      </li>
+      <li>
+        <span class="command">git pull</span>
+        <span class="description">Fetch + merge</span>
+      </li>
+      <li>
+        <span class="command">git push origin master</span>
+        <span class="description">Pushes master to origin</span>
+      </li>
+      <li>
+        <span class="command">git push</span>
+        <span class="description">Shortcut for “git push origin master”</span>
+      </li>
+    </ul>
+
+    <h3>Sharing tags</h3>
+    <ul>
+      <li>
+        <span class="command">git push origin v1.0</span>
+        <span class="description">Pushes tag v1.0 to origin</span>
+      </li>
+      <li>
+        <span class="command">git push origin —delete v1.0</span>
+        <span class="description">Deletes tag v1.0 from origin</span>
+      </li>
+    </ul>
+
+    <h3>Sharing branches</h3>
+    <ul>
+      <li>
+        <span class="command">git branch -r</span>
+        <span class="description">Shows remote tracking branches</span>
+      </li>
+      <li>
+        <span class="command">git branch -vv</span>
+        <span class="description">Shows local & remote tracking branches</span>
+      </li>
+      <li>
+        <span class="command">git push -u origin bugfix</span>
+        <span class="description"
+          >Pushes bugfix to origin and sets up tracking</span
+        >
+      </li>
+      <li>
+        <span class="command">git push -d origin bugfix</span>
+        <span class="description">Removes bugfix from origin</span>
+      </li>
+    </ul>
+
+    <h3>Managing remotes</h3>
+    <ul>
+      <li>
+        <span class="command">git remote</span>
+        <span class="description">Shows remote repos</span>
+      </li>
+      <li>
+        <span class="command">git remote add upstream url</span>
+        <span class="description">Adds a new remote called upstream</span>
+      </li>
+      <li>
+        <span class="command">git remote rm upstream</span>
+        <span class="description">Remotes upstream</span>
+      </li>
+    </ul>
+
+    <h2 class="section-header">Rewriting History</h2>
+    <h3>Undoing commits</h3>
+    <ul>
+      <li>
+        <span class="command">git reset --soft HEAD^</span>
+        <span class="description"
+          >Removes the last commit, keeps changes staged</span
+        >
+      </li>
+      <li>
+        <span class="command">git reset --mixed HEAD^</span>
+        <span class="description">Unstages the changes as well</span>
+      </li>
+      <li>
+        <span class="command">git reset --hard HEAD^</span>
+        <span class="description">Discards local changes</span>
+      </li>
+    </ul>
+
+    <h3>Reverting commits</h3>
+    <ul>
+      <li>
+        <span class="command">git revert 72856ea</span>
+        <span class="description">Reverts the given commit</span>
+      </li>
+      <li>
+        <span class="command">git revert HEAD~3..</span>
+        <span class="description">Reverts the last three commits</span>
+      </li>
+      <li>
+        <span class="command">git revert --no-commit HEAD~3..</span>
+        <span class="description"
+          >Reverts the last three commits without committing</span
+        >
+      </li>
+    </ul>
+
+    <h3>Recovering lost commits</h3>
+    <ul>
+      <li>
+        <span class="command">git reflog</span>
+        <span class="description">Shows the history of HEAD</span>
+      </li>
+      <li>
+        <span class="command">git reflog show bugfix</span>
+        <span class="description">Shows the history of bugfix pointer</span>
+      </li>
+    </ul>
+
+    <h3>Amending the last commit</h3>
+    <p>
+      <span class="command">git commit --amend</span>
+      <span class="description">Amends the last commit</span>
+    </p>
+
+    <h3>Interactive rebasing</h3>
+    <p>
+      <span class="command">git rebase -i HEAD~5</span>
+      <span class="description"
+        >Initiates interactive rebasing for the last 5 commits</span
+      >
+    </p>
+
+    <a href="https://github.com/your-username" target="_blank">Check out my GitHub</a>
+
+  </body>
+</html>

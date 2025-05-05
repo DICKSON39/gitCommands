@@ -1,0 +1,76 @@
+/* Base styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0d1b2a;
+    color: #e0e1dd;
+    margin: 0;
+    padding: 2rem;
+    line-height: 1.6;
+  }
+  
+  h1, h2, h3 {
+    color: #00b4d8;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  h2.section-header {
+    font-size: 1.8rem;
+    margin-top: 2.5rem;
+    border-bottom: 2px solid #0077b6;
+    padding-bottom: 0.3rem;
+  }
+  
+  h3 {
+    font-size: 1.4rem;
+    margin-top: 1.5rem;
+    color: #90e0ef;
+  }
+  
+  ul {
+    padding-left: 1.5rem;
+  }
+  
+  li {
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Command styling */
+  .command {
+    display: inline-block;
+    background-color: #1e2a38;
+    color: #caf0f8;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    margin-right: 0.5rem;
+    font-weight: bold;
+  }
+  
+  .description {
+    color: #adb5bd;
+    font-style: italic;
+  }
+  
+  /* Responsive tweaks */
+  @media (max-width: 600px) {
+    body {
+      padding: 1rem;
+    }
+  
+    h1 {
+      font-size: 2rem;
+    }
+  
+    h2.section-header {
+      font-size: 1.4rem;
+    }
+  
+    h3 {
+      font-size: 1.2rem;
+    }
+  }
+  
